@@ -3,23 +3,23 @@ void bestFit(int block[], int blockSIZE, int process[], int processSIZE)
 {
     for (int i = 0; i < processSIZE; i++)
     {
-        int bestIdx = -1;
+        int worstFIT = -1;
         for (int j = 0; j < blockSIZE; j++)
         {
             if (block[j] >= process[i])
             {
-                if (bestIdx == -1)
-                    bestIdx = j;
-                else if (block[bestIdx] < block[j])
-                    bestIdx = j;
+                if (worstFIT == -1)
+                    worstFIT = j;
+                else if (block[worstFIT] < block[j])
+                    worstFIT = j;
             }
         }
 
-        if (bestIdx != -1)
+        if (worstFIT != -1)
         {
-            printf("Process %d (%dKB) allocated at %dKB Memory Space\n", i + 1, process[i], block[bestIdx]);
-            block[bestIdx] -= process[i];
-            printf("Remaining space is : %d\n\n", block[bestIdx]);
+            printf("Process %d (%dKB) allocated at %dKB Memory Space\n", i + 1, process[i], block[worstFIT]);
+            block[worstFIT] -= process[i];
+            printf("Remaining space is : %d\n\n", block[worstFIT]);
         }
         else
             printf("Process %d (%dKB) is not allocated\n\n", i + 1, process[i]);
